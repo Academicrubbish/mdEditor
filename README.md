@@ -11,10 +11,10 @@
 
 ## 操作
 
-![](static\README\Snipaste_2024-08-24_14-21-43.png)
+![](./static/README/Snipaste_2024-08-24_14-21-43.png)
 
 ## 打赏
 
 如果用着不错，可以『Star』或『打赏』支持。因为有你，开源更美好。
 
-![](static\README\Snipaste_2024-08-24_14-34-24.png)
+![](./static/README/Snipaste_2024-08-24_14-34-24.png)
