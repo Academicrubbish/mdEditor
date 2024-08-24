@@ -28,7 +28,7 @@
 		</view>
 		<view class="input-content">
 			<textarea v-if="status" maxlength="-1" v-model="textareaData"></textarea>
-			<towxml v-if="!status" :nodes="textareaHtml" />
+			<towxml v-if="!status" :nodes="towxmlData" />
 		</view>
 	</view>
 </template>
@@ -39,7 +39,7 @@
 		data() {
 			return {
 				textareaData: "",
-				textareaHtml: "",
+				towxmlData: "",
 				status: true,
 			};
 		},
@@ -56,10 +56,21 @@
 			submit() {
 				this.$emit("submit", {
 					textareaData: this.textareaData,
-					textareaHtml: this.textareaHtml,
+					towxmlData: this.towxmlData,
 				});
 			},
 			toolBarClick(type) {
+				const updateTextareaContent = () => {
+
+					this.towxmlData = this.towxml(this.textareaData, "markdown", {
+						// theme: "dark",
+						events: {
+							tap: (e) => {
+								console.log("tap", e);
+							},
+						},
+					});
+				};
 				const adjustIndentation = (increase) => {
 					const lines = this.textareaData.split("\n");
 					if (lines.length > 0) {
@@ -163,6 +174,7 @@
 						});
 						break;
 					case "toggle":
+						if (this.status) updateTextareaContent();
 						this.status = !this.status;
 						break;
 				}
@@ -171,14 +183,6 @@
 		watch: {
 			textareaData: function(newValue, oldValue) {
 				console.log("111", newValue);
-				this.textareaHtml = this.towxml(newValue, "markdown", {
-					// theme: "dark",
-					events: {
-						tap: (e) => {
-							console.log("tap", e);
-						},
-					},
-				});
 			},
 		},
 	};
